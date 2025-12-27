@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"> <title>Océano Inmersivo - Sonido 3D</title>
+<meta name="description" content="Experiencia inmersiva de océano con sonido espacial.">
+<meta name="description" content="Inmersión Oceánica Binaural: La experiencia definitiva de relajación.">
+<meta name="keywords" content="oceano, 3D audio, relax, binaural">
+
+<meta property="og:title" content="Océano Inmersivo">
+<meta property="og:description" content="Escucha el mar como nunca antes.">
+<meta property="og:image" content="https://tusitio.com/preview-hq.jpg">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tuusuario">
+
+<link rel="stylesheet" href="style.css">
+<script
+  src="https://js.sentry-cdn.com/b180312d8105cdc36be1795f448c04fe.min.js"
+  crossorigin="anonymous" async
+></script>
+</head>
+
+<body>
+
+ <img id="ocean-bg" src="mar-min.jpg" fetchpriority="high" alt="Océano azul profundo">
+
+ <div id="loader-wrapper">
+     <div class="loader-content">
+         <p id="loader-text">Sintonizando el océano...</p>
+         <div class="progress-container">
+             <div id="progress-bar"></div>
+         </div>
+     </div>
+ </div>
+
+ <div class="content">
+     <h1 class="titulo-fijo">Siente el Océano</h1>
+     <h2 id="poesia">Cargando la voz del mar...</h2>
+     
+     <div id="frases-emergentes"></div> 
+     
+     <button class="btn-immerse btn-pulse" onclick="window.tocar()">INICIAR INMERSIÓN</button>
+ </div>
+
+ <audio id="sound" src="sound.mp3" loop></audio>
+ 
+ <script src="app.js"></script>
+  
+</body>
+</html>
+
+
+

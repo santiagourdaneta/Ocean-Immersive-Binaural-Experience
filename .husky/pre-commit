@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🛡️  Revisando el océano de código antes del commit..."
+npx lint-staged || (echo "❌ ERROR: El código tiene problemas de formato o de lógica. Revisa arriba." && exit 1)
+echo "✅ Todo perfecto. El código es digno del universo. Procediendo..."

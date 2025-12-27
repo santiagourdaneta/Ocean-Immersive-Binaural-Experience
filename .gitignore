@@ -1,0 +1,16 @@
+# Dependencias
+node_modules/
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Secretos y variables de entorno (NUNCA SUBIR)
+.env
+.env.local
+.DS_Store
+
+# Sentry y archivos temporales
+.sentry-debug-log

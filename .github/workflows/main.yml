@@ -1,0 +1,45 @@
+name: Deploy Seguro y Optimizado
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      # 1. SAST: Escaneo de vulnerabilidades (Security First)
+      - name: Scan for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # 2. MINIFICACIÓN Y HASHING
+      - name: Minify HTML/CSS/JS
+        run: |
+          npm install -g html-minifier terser clean-css-cli
+          # Minificar CSS
+          cleancss -o dist/style.min.css style.css
+          # Minificar HTML e inyectar hashes (simplificado)
+          html-minifier --collapse-whitespace --remove-comments index.html -o dist/index.html
+
+      - name: Minify and Inject Secrets
+        run: |
+          # Usamos un comando para reemplazar el texto 'PROCESO_DSN' por el secreto real
+          sed -i 's|TU_DSN_DE_SENTRY_AQUÍ|${{ secrets.SENTRY_DSN }}|g' app.js
+          npm install -g terser
+          terser app.js -o dist/app.min.js
+
+      # 3. OBSERVABILIDAD: Inyección de DSN de Sentry
+      - name: Sentry Release
+        run: |
+          echo "Sentry DSN inyectado para monitoreo de errores en tiempo real"
+
+      # 4. DEPLOY: A servidor con WAF activo (GitHub Pages / Vercel)
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist

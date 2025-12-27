@@ -1,0 +1,118 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    background: #001219; 
+    font-family: 'Segoe UI', sans-serif; 
+    color: #fff; 
+    height: 100vh; 
+    overflow: hidden; 
+}
+
+/* --- FONDO --- */
+#ocean-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.8);
+    transition: filter 1.5s ease;
+}
+
+#ocean-bg.bg-dark { filter: brightness(0.3); }
+
+/* --- CONTENIDO Y JERARQUÍA --- */
+.content {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+}
+
+.titulo-fijo { margin-top: 5vh; font-size: 1.5rem; opacity: 0.6; }
+#poesia { font-size: 1rem; font-style: italic; color: #94d2bd; margin-top: 10px; }
+
+/* --- FRASES 3D (ZONA MEDIA) --- */
+.frase-3d {
+    position: absolute;
+    top: 35%; /* Zona Segura: Lejos del botón */
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0;
+    color: #00fbff; 
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-align: center;
+    width: 85%;
+    text-shadow: 0px 0px 20px rgba(0, 251, 255, 0.6), 2px 2px 10px rgba(0, 0, 0, 0.9);
+    animation: emergeYRegresa 12s ease-in-out forwards;
+}
+
+@keyframes emergeYRegresa {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); filter: blur(10px); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); filter: blur(0px); }
+    80% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); filter: blur(0px); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); filter: blur(10px); }
+}
+
+/* --- BOTÓN Y LATIDO --- */
+.btn-immerse {
+    position: absolute;
+    bottom: 15%; /* Zona Segura: Abajo */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 35px;
+    background: rgba(0, 251, 255, 0.05);
+    border: 2px solid #00fbff;
+    color: #00fbff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    z-index: 100;
+}
+
+/* Efecto Latido (Pulse) */
+.btn-pulse { animation: pulseAnim 2s infinite; }
+
+@keyframes pulseAnim {
+    0% { box-shadow: 0 0 0 0 rgba(0, 251, 255, 0.7); }
+    70% { box-shadow: 0 0 0 20px rgba(0, 251, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 251, 255, 0); }
+}
+
+.btn-immerse:hover { background: #00fbff; color: #001219; box-shadow: 0 0 30px #00fbff; }
+
+/* --- BURBUJAS Y LOADER --- */
+.burbuja {
+    position: absolute; bottom: -50px;
+    background: rgba(0, 251, 255, 0.3);
+    border-radius: 50%; z-index: 1;
+    animation: subirBurbuja linear forwards;
+}
+
+@keyframes subirBurbuja {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+#loader-wrapper {
+    position: fixed; top: 0; width: 100%; height: 100%;
+    background: #001219; display: flex; justify-content: center;
+    align-items: center; z-index: 9999; transition: 0.8s;
+}
+.loader-hidden { opacity: 0; pointer-events: none; }
+.progress-container { width: 200px; height: 2px; background: rgba(255,255,255,0.1); margin-top: 15px; }
+#progress-bar { width: 0%; height: 100%; background: #00fbff; transition: 0.3s; }
+
+#frases-emergentes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10; /* Asegura que esté sobre el fondo */
+    pointer-events: none;
+}

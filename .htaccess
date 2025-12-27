@@ -1,0 +1,15 @@
+# 1. EVITAR CLICKJACKING
+Header set X-Frame-Options "DENY"
+
+# 2. PREVENCIÓN DE XSS (Para navegadores que lo soporten)
+Header set X-XSS-Protection "1; mode=block"
+
+# 3. CONTENT SECURITY POLICY (CSP)
+# Solo permite cargar recursos de tu propio dominio
+Header set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self';"
+
+# 4. EVITAR SNIFFING DE TIPOS MIME
+Header set X-Content-Type-Options "nosniff"
+
+# 5. HSTS (Forzar HTTPS)
+# Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
