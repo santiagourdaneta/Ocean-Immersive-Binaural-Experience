@@ -1,5 +1,8 @@
 name: Deploy Seguro y Optimizado
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [ main ]
